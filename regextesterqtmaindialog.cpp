@@ -68,14 +68,11 @@ std::vector<std::string> ribi::RegexTesterQtMainDialog::GetRegexMatches(
 
 bool ribi::RegexTesterQtMainDialog::GetRegexMatchLine(
   const std::string& /* line */,
-  const std::string& /* regex_str */) const noexcept
+  const std::string& /* regex_str */) const
 {
-  assert(!"Qt does not have a regex match algorithm");
-  //if (!GetRegexValid(regex_str)) return false;
-
-  return false;
-  //const QRegExp(regex_str);
-  //return boost::regex_match(line,r);
+  std::stringstream msg;
+  msg << __func__ << ": Qt does not have a regex match algorithm";
+  throw std::logic_error(msg.str());
 }
 
 std::string ribi::RegexTesterQtMainDialog::GetRegexReplace(
@@ -83,16 +80,16 @@ std::string ribi::RegexTesterQtMainDialog::GetRegexReplace(
   const std::string& /* regex_str */,
   const std::string& /* format_str */) const
 {
-  return "Qt does not have a regex replace algorithm";
+  std::stringstream msg;
+  msg << __func__ << ": Qt does not have a regex replace algorithm";
+  throw std::logic_error(msg.str());
 }
 
 
 bool ribi::RegexTesterQtMainDialog::GetRegexValid(
-  const std::string& /* regex_str */) const noexcept
+  const std::string& /* regex_str */) const
 {
-  assert(!"TODO");
-  //try { const boost::regex regex_temp(regex_str); }
-  //catch (boost::regex_error& e) { return false; }
-  //return true;
-  throw std::runtime_error("TODO: ribi::RegexTesterQtMainDialog::GetRegexValid");
+  std::stringstream msg;
+  msg << __func__ << ": TODO";
+  throw std::logic_error(msg.str());
 }

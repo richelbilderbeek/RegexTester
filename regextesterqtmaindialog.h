@@ -50,26 +50,28 @@ struct RegexTesterQtMainDialog : public RegexTesterMainDialog
     const std::string& r) const;
 
   ///Does the regex match the whole line?
-  bool GetRegexMatchLine(const std::string &line, const std::string &regex_str) const noexcept;
+  bool GetRegexMatchLine(const std::string &line, const std::string &regex_str) const override;
 
   ///Is the regex valid?
-  bool GetRegexValid(const std::string &regex_str) const noexcept;
+  bool GetRegexValid(const std::string &regex_str) const override;
 
   ///Replace all regexes in a std::string following a regex and a format
   std::string GetRegexReplace(
     const std::string& str,
     const std::string& regex_str,
-    const std::string& format_str) const;
+    const std::string& format_str
+  ) const override;
 
   ///Obtain a description of the used implementation
-  std::string GetUsedImplementation() const noexcept { return "QRegex"; }
+  std::string GetUsedImplementation() const noexcept override { return "QRegex"; }
 
   private:
   ///Get all regex matches withing a line
   //From http://www.richelbilderbeek.nl/CppGetRegexMatches.htm
   static std::vector<std::string> GetRegexMatches(
     const std::string& s,
-    const QRegExp& r);
+    const QRegExp& r
+  );
 
 };
 

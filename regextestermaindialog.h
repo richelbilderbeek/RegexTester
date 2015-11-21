@@ -44,7 +44,7 @@ struct RegexTesterMainDialog
   virtual boost::shared_ptr<RegexTesterMainDialog> Clone() const noexcept = 0;
 
   ///Get an example format used to replace regex matches
-  virtual std::string GetExampleFormat() const noexcept = 0;
+  virtual std::string GetExampleFormat() const = 0;
 
   ///Get an example line to apply a regex on
   virtual std::string GetExampleLine() const noexcept
@@ -56,10 +56,10 @@ struct RegexTesterMainDialog
   virtual std::string GetExampleRegex() const noexcept = 0;
 
   ///Is the regex valid?
-  virtual bool GetRegexValid(const std::string& regex_str) const noexcept = 0;
+  virtual bool GetRegexValid(const std::string& regex_str) const = 0;
 
   ///Does the regex match the whole line?
-  virtual bool GetRegexMatchLine(const std::string& line, const std::string& regex_str) const noexcept = 0;
+  virtual bool GetRegexMatchLine(const std::string& line, const std::string& regex_str) const = 0;
 
   ///Get all regex matches withing a line
   //From http://www.richelbilderbeek.nl/CppGetRegexMatches.htm
@@ -72,7 +72,8 @@ struct RegexTesterMainDialog
   virtual std::string GetRegexReplace(
     const std::string& str,
     const std::string& regex_str,
-    const std::string& format_str) const = 0;
+    const std::string& format_str
+  ) const = 0;
 
   ///Obtain a description of the used implementation
   virtual std::string GetUsedImplementation() const noexcept = 0;

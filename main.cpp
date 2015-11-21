@@ -1,23 +1,3 @@
-//---------------------------------------------------------------------------
-/*
-RegexTester, regular expression tester
-Copyright (C) 2010 Richel Bilderbeek
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the
-GNU General Public License for more details.
-You should have received a copy of the GNU General Public License
-along with this program.If not, see <http://www.gnu.org/licenses/>.
-*/
-//---------------------------------------------------------------------------
-//From http://www.richelbilderbeek.nl/ToolRegexTester.htm
-//---------------------------------------------------------------------------
 #include <iostream>
 
 #pragma GCC diagnostic push
@@ -70,13 +50,13 @@ int main(int argc, char* argv[])
 
   if (m.count("a"))
   {
-    std::cout << ribi::RegexTesterMenuDialog::GetAbout() << '\n';
+    std::cout << ribi::RegexTesterMenuDialog().GetAbout() << '\n';
     return 0;
   }
 
   if (m.count("v"))
   {
-    std::cout << ribi::RegexTesterMenuDialog::GetVersion() << '\n';
+    std::cout << ribi::RegexTesterMenuDialog().GetVersion() << '\n';
     return 0;
   }
 
@@ -92,11 +72,13 @@ int main(int argc, char* argv[])
     dialogs.push_back(p);
   }
   #ifndef _WIN32
+  #ifdef TOOLREGEXTESTER_ADD_BOOST_REGEX
   {
-    boost::shared_ptr<RegexTesterMainDialog> p(new RegexTesterBoostRegexMainDialog);
+    boost::shared_ptr<ribi::RegexTesterMainDialog> p(new ribi::RegexTesterBoostRegexMainDialog);
     assert(p);
     dialogs.push_back(p);
   }
+  #endif // TOOLREGEXTESTER_ADD_BOOST_REGEX
   #endif
   {
     boost::shared_ptr<ribi::RegexTesterMainDialog> p(new ribi::RegexTesterQtMainDialog);
@@ -124,14 +106,36 @@ int main(int argc, char* argv[])
     [&r, &s](const boost::shared_ptr<ribi::RegexTesterMainDialog> dialog)
     {
       std::cout << "Using: " << dialog->GetUsedImplementation() << '\n';
-      std::cout << std::boolalpha
-        << "* Regex valid: " << dialog->GetRegexValid(r) << '\n'
-        << "* Regex matches line: " << dialog->GetRegexMatchLine(s,r) << '\n'
-        << "* Regexes found in line: { ";
-      const std::vector<std::string> v = dialog->GetRegexMatches(s,r);
-      std::copy(v.begin(),v.end(),std::ostream_iterator<std::string>(std::cout,","));
-      std::cout
-        << " }\n";
+      std::cout << std::boolalpha;
+      std::cout << "* Regex valid: ";
+      try
+      {
+        std::cout << dialog->GetRegexValid(r) << '\n';
+      }
+      catch (std::logic_error& e)
+      {
+        std::cout << "[TODO]\n";
+      }
+      std::cout << "* Regex matches line: ";
+      try
+      {
+        std::cout << dialog->GetRegexMatchLine(s,r) << '\n';
+      }
+      catch (std::logic_error& e)
+      {
+        std::cout << "[TODO]\n";
+      }
+      std::cout  << "* Regexes found in line: { ";
+      try
+      {
+        const std::vector<std::string> v = dialog->GetRegexMatches(s,r);
+        std::copy(v.begin(),v.end(),std::ostream_iterator<std::string>(std::cout,","));
+      }
+      catch (std::logic_error& e)
+      {
+        std::cout << "[TODO] ";
+      }
+      std::cout << " }\n";
     }
   );
 }

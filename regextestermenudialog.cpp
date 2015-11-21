@@ -48,7 +48,7 @@ ribi::About ribi::RegexTesterMenuDialog::GetAbout() const noexcept
     "Richel Bilderbeek",
     "RegexTester",
     "regular expression tester",
-    "the 16th of July 2013",
+    "November 21st of 2015",
     "2010-2015",
     "http://www.richelbilderbeek.nl/ToolRegexTester.htm",
     GetVersion(),
@@ -70,18 +70,9 @@ ribi::Help ribi::RegexTesterMenuDialog::GetHelp() const noexcept
   );
 }
 
-boost::shared_ptr<const ribi::Program> ribi::RegexTesterMenuDialog::GetProgram() const noexcept
-{
-  const boost::shared_ptr<const Program> p {
-    new ProgramRegexTester
-  };
-  assert(p);
-  return p;
-}
-
 std::string ribi::RegexTesterMenuDialog::GetVersion() const noexcept
 {
-  return "1.7";
+  return "2.0";
 }
 
 std::vector<std::string> ribi::RegexTesterMenuDialog::GetVersionHistory() const noexcept
@@ -91,7 +82,8 @@ std::vector<std::string> ribi::RegexTesterMenuDialog::GetVersionHistory() const 
     "2012-01-07: Version 1.4: port to Wt and console application",
     "2012-09-24: Version 1.5: added Qt and C++11 versions",
     "2013-03-20: Version 1.6: added TR1 version, added replace",
-    "2013-07-16: Version 1.7: added Boost.Xpressive"
+    "2013-07-16: Version 1.7: added Boost.Xpressive",
+    "2015-11-21: Version 2.0: moved to own GitHub"
   };
 }
 
