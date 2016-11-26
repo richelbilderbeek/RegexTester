@@ -55,10 +55,6 @@ private:
 
   const boost::shared_ptr<RegexTesterMainDialog> m_dialog;
 
-  #ifndef NDEBUG
-  static void Test() noexcept;
-  #endif
-
 private slots:
   void onAnyChange();
 };

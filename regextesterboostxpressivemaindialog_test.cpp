@@ -1,3 +1,23 @@
+//---------------------------------------------------------------------------
+/*
+RegexTester, regular expression tester
+Copyright (C) 2010-2015 Richel Bilderbeek
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the
+GNU General Public License for more details.
+You should have received a copy of the GNU General Public License
+along with this program.If not, see <http://www.gnu.org/licenses/>.
+*/
+//---------------------------------------------------------------------------
+//From http://www.richelbilderbeek.nl/ToolRegexTester.htm
+//---------------------------------------------------------------------------
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Weffc++"
 #pragma GCC diagnostic ignored "-Wunused-local-typedefs"
@@ -12,7 +32,9 @@
 
 ribi::RegexTesterBoostXpressiveMainDialog::RegexTesterBoostXpressiveMainDialog()
 {
-
+  #ifndef NDEBUG
+  Test();
+  #endif
 }
 
 
@@ -112,3 +134,31 @@ bool ribi::RegexTesterBoostXpressiveMainDialog::GetRegexValid(
   */
 }
 
+#ifndef NDEBUG
+void ribi::RegexTesterBoostXpressiveMainDialog::Test() noexcept
+{
+  {
+    static bool is_tested{false};
+    if (is_tested) return;
+    is_tested = true;
+  }
+  RegexTesterBoostXpressiveMainDialog d;
+  assert(!d.GetExampleRegex().empty());
+  for (const auto& v: d.GetTestRegexes() )
+  {
+    d.GetRegexValid(v);
+    for (const auto& w: d.GetTestStrings() )
+    {
+      d.GetRegexMatches(v,w);
+      d.GetRegexMatches(w,v);
+      d.GetRegexMatchLine(v,w);
+      d.GetRegexMatchLine(w,v);
+      d.GetRegexReplace(v,w,v);
+      d.GetRegexReplace(w,v,v);
+      d.GetRegexReplace(v,w,w);
+      d.GetRegexReplace(w,v,w);
+      d.GetRegexValid(w);
+    }
+  }
+}
+#endif

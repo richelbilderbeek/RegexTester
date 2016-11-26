@@ -65,17 +65,6 @@ struct RegexTesterBoostXpressiveMainDialog : public RegexTesterMainDialog
 
   ///Obtain a description of the used implementation
   std::string GetUsedImplementation() const noexcept { return "Boost"; }
-
-  private:
-  ///Get all regex matches withing a line
-  //From http://www.richelbilderbeek.nl/CppGetRegexMatches.htm
-  //static std::vector<std::string> GetRegexMatches(
-  //  const std::string& s,
-  //  const boost::xpressive::sregex& r);
-
-  #ifndef NDEBUG
-  static void Test() noexcept;
-  #endif
 };
 
 } //~namespace ribi
