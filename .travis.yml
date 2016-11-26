@@ -1,0 +1,40 @@
+sudo: true
+language: cpp
+compiler: gcc
+
+addons: 
+  apt: 
+    packages: libboost-all-dev
+
+before_install:
+  # C++14
+  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+  - sudo apt-get update -qq
+  # Codecov
+  - sudo pip install codecov
+  # OCLint
+  - ./install_oclint.sh
+
+install: 
+  # C++14
+  - sudo apt-get install -qq g++-5
+  # Codecov
+  - sudo update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-5 90
+
+script: 
+  # Build console version
+  - qmake -qt=qt5 RegexTesterConsole.pro
+  - make
+  - ./RegexTesterConsole
+  # Build desktop
+  - qmake -qt=qt5 RegexTesterDesktop.pro
+  - make
+  # Get code coverage
+  - ./get_code_cov.sh
+  - codecov
+  # Call OCLint
+  - ./do_oclint.sh
+
+after_success:
+  # Codecov
+  - bash <(curl -s https://codecov.io/bash)
