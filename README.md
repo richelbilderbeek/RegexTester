@@ -1,13 +1,8 @@
 # RegexTester
 
+[![Codecov](https://codecov.io/gh/richelbilderbeek/RegexTester/branch/main/graph/badge.svg)](https://codecov.io/gh/richelbilderbeek/RegexTester)
+
 [Go to the nicely rendered website](https://richelbilderbeek.github.io/RegexTester/).
-
-[![Travis CI logo](TravisCI.png)](https://travis-ci.org)
-![Whitespace](Whitespace.png)
-[![Codecov logo](Codecov.png)](https://www.codecov.io)
-
-[![Build Status](https://travis-ci.org/richelbilderbeek/RegexTester.svg?branch=master)](https://travis-ci.org/richelbilderbeek/RegexTester)
-[![codecov.io](https://codecov.io/github/richelbilderbeek/RegexTester/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/RegexTester?branch=master)
 
 Tool to investigate multiple C++ regex libraries their behavior.
 

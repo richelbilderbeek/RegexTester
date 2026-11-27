@@ -2,7 +2,7 @@
 site_name = "RegexTester"
 site_url = "https://richelbilderbeek.github.io/RegexTester/"
 repo_url = "https://github.com/richelbilderbeek/RegexTester"
-edit_uri = "blob/master/docs/"
+edit_uri = "blob/main/docs/"
 
 nav = [
   { "Start" = "README.md"}
